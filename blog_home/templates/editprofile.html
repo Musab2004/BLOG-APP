@@ -1,0 +1,63 @@
+{% include 'md_bootstrap_scripts.html' %}
+
+
+
+
+<div class="container" style="width: 80%;margin-left: 10%; margin-top: 10%;">
+    <div class="text-center">
+        <b style="font-size: 34px;">Update Profile</b>
+    </div>
+    
+    <div class="text-center">
+        <img src="https://mdbootstrap.com/img/new/slides/080.jpg" height="200"width="200" alt="Avatar" class="rounded-circle avatar-image">
+    </div>
+    
+<form method="post" action="{% url 'user_signup' %}">
+ 
+
+  
+
+    <!-- Name input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="registerName" name="name" class="form-control" value={{user.name}} />
+      <label class="form-label" for="registerName"></label>
+    </div>
+
+    <!-- Age input -->
+    <div class="form-outline mb-4">
+      <input type="number" id="registerAge" class="form-control" min="0" name="age" 
+             pattern="[0-9]+" title="Please enter a valid numeric value" value={{user.age}} />
+      <label class="form-label" for="registerAge"></label>
+  </div>
+  
+ 
+  
+  
+
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <input type="email" id="registerEmail" name="email_address" class="form-control" value={{user.email_address}} />
+        <label class="form-label" for="registerEmail"></label>
+    </div>
+    
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="registerPassword" name="password" class="form-control" value={{user.password}} />
+      <label class="form-label" for="registerPassword"></label>
+    </div>
+
+    <!-- Repeat Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="registerRepeatPassword"  class="form-control" value={{user.password}} />
+      <label class="form-label" for="registerRepeatPassword"></label>
+    </div>
+
+    <!-- Checkbox -->
+
+ 
+    <!-- Submit button -->
+    {% csrf_token %}
+    <button type="submit" id="submitButton" class="btn btn-primary btn-block mb-3">update</button>
+  </form>
+  </div>

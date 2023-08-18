@@ -1,0 +1,197 @@
+<!--Main Navigation-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
+</head>
+<body>
+    <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script>
+<header>
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+  
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+    </style>
+  
+    <!-- Navbar -->
+    <div style="width:100%;">
+{% include 'navbar.html' %}
+</div>
+    <!-- Navbar -->
+  
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+      <h1 class="mb-3 h2">Welcome to ChronicleCraft</h1>
+      <p class="mb-3">Best & free guide of responsive web design</p>
+      <a class="btn btn-primary m-2" href="http://127.0.0.1:8000/blog/writeblog" role="button" rel="nofollow"
+         >Create a blog</a>
+ 
+    </div>
+    <!-- Jumbotron -->
+  </header>
+  <!--Main Navigation-->
+  
+  <!--Main layout-->
+  <main class="my-5">
+    <div class="container">
+      <!--Section: News of the day-->
+      <section class="border-bottom pb-4 mb-5">
+        <div class="row gx-5">
+          <div class="col-md-6 mb-4">
+            <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+              <img src="{{blogs_page.0.blog_title_image.url}}" class="img-fluid" style="width: 100%; height: 200px;" />
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+          </div>
+  
+          <div class="col-md-6 mb-4">
+            <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
+            <h4><strong>{{blogs_page.0.title}}</strong></h4>
+            <p class="text-muted">
+             {{blogs_page.0.description}}
+            </p>
+            <form id="blogForm" method="POST" action="{% url 'blog_home:listblog' %}">
+                {% csrf_token %}
+                <input type="hidden" name="blog_id" value="{{ blogs_page.0.id }}">
+                <button type="submit" class="btn btn-primary">Go to Blog</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!--Section: News of the day-->
+  
+      <!--Section: Content-->
+      <section>
+        <div class="row">
+          {% for blog in blogs_page %}
+           {% if not forloop.first %}
+          
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+              <!-- News block -->
+              <div>
+                <!-- Featured image -->
+                <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/new/fluid/city/113.jpg" class="img-fluid" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+      
+                <!-- Article data -->
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <a href="" class="text-info">
+                      <i class="fas fa-plane"></i>
+                      Travels
+                    </a>
+                  </div>
+      
+                  <div class="col-6 text-end">
+                    <u> {{ blog.created_at.date }}</u>
+                  </div>
+                </div>
+      
+                <!-- Article title and description -->
+                <a href="" class="text-dark">
+                  <h5>{{ blog.title }}</h5>
+      
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iste aliquid. Sed
+                    id nihil magni, sint vero provident esse numquam perferendis ducimus dicta
+                    adipisci iusto nam temporibus modi animi laboriosam?
+                  </p>
+                </a>
+      
+                <hr />
+              </div>
+              <!-- News block -->
+            </div>
+            {% endif %} 
+          {% endfor %}
+        </div>
+      </section>
+      
+      <!--Section: Content-->
+  
+      <!-- Pagination -->
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          {% if blogs_page.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1" aria-label="First">
+              <span aria-hidden="true">first</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ persons_page.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">previous</span>
+            </a>
+          </li>
+          {% endif %}
+    
+          {% for page_num in blogs_page.paginator.page_range %}
+          <li class="page-item {% if persons_page.number == page_num %}active{% endif %}">
+            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+          </li>
+          {% endfor %}
+    
+          {% if blogs_page.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ persons_page.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">next</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ persons_page.paginator.num_pages }}" aria-label="Last">
+              <span aria-hidden="true">last</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    
+  <!--Main layout-->
+  
+  <!--Footer-->
+  <footer class="bg-light text-lg-start">
+
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!--Footer-->
+</body>
+</html>
