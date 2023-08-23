@@ -49,8 +49,8 @@ rel="stylesheet"
     <!-- Jumbotron -->
     <div id="intro" class="p-5 text-center bg-light">
       <h1 class="mb-3 h2">Welcome to ChronicleCraft</h1>
-      <p class="mb-3">Best & free guide of responsive web design</p>
-      <a class="btn btn-primary m-2" href="http://127.0.0.1:8000/blog/writeblog" role="button" rel="nofollow"
+      <p class="mb-3">You can Find best Blogs Here</p>
+      <a class="btn  m-2"style="background-color:  #000F1F;color: lightgrey;font-weight: bold;" href="http://127.0.0.1:8000/blog/writeblog" role="button" rel="nofollow"
          >Create a blog</a>
  
     </div>
@@ -74,7 +74,7 @@ rel="stylesheet"
           </div>
   
           <div class="col-md-6 mb-4">
-            <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
+            <!-- <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">latest</span> -->
             <h4><strong>{{blogs_page.0.title}}</strong></h4>
             <p class="text-muted">
              {{blogs_page.0.description}}
@@ -82,7 +82,7 @@ rel="stylesheet"
             <form id="blogForm" method="POST" action="{% url 'blog_home:listblog' %}">
                 {% csrf_token %}
                 <input type="hidden" name="blog_id" value="{{ blogs_page.0.id }}">
-                <button type="submit" class="btn btn-primary">Go to Blog</button>
+                <button type="submit" class="btn" style="background-color:  #000F1F;color: lightgrey;font-weight: bold;">Go to Blog</button>
             </form>
           </div>
         </div>
@@ -100,7 +100,7 @@ rel="stylesheet"
               <div>
                 <!-- Featured image -->
                 <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
-                  <img src="https://mdbootstrap.com/img/new/fluid/city/113.jpg" class="img-fluid" />
+                  <img src="{{blog.blog_title_image.url}}" class="img-fluid" style="width: 100%;height: 200px;" />
                   <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                   </a>
@@ -109,9 +109,9 @@ rel="stylesheet"
                 <!-- Article data -->
                 <div class="row mb-3">
                   <div class="col-6">
-                    <a href="" class="text-info">
-                      <i class="fas fa-plane"></i>
-                      Travels
+                    <a href=""  style="color:  gray;">
+                      
+                      {{ blog.Category }}
                     </a>
                   </div>
       
@@ -125,10 +125,13 @@ rel="stylesheet"
                   <h5>{{ blog.title }}</h5>
       
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, iste aliquid. Sed
-                    id nihil magni, sint vero provident esse numquam perferendis ducimus dicta
-                    adipisci iusto nam temporibus modi animi laboriosam?
+                   {{blog.description}}
                   </p>
+                  <form id="blogForm" method="POST" action="{% url 'blog_home:listblog' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="blog_id" value="{{ blog.id }}">
+                    <button type="submit" class="btn "style="background-color:  #000F1F;color: lightgrey;font-weight: bold;">Go to Blog</button>
+                </form>
                 </a>
       
                 <hr />
@@ -182,13 +185,13 @@ rel="stylesheet"
   <!--Main layout-->
   
   <!--Footer-->
-  <footer class="bg-light text-lg-start">
+  <footer class="bg-dark text-lg-start">
 
   
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <div class="text-center p-3" style=" color: lightgray;">
+      © 2023 Copyright:
+      <a class="text-light" href="">ChronicleCraft.com</a>
     </div>
     <!-- Copyright -->
   </footer>

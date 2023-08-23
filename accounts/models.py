@@ -34,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     profile_pic=models.ImageField(upload_to='images/',null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    is_moderator= models.BooleanField(default=False)
     objects = PersonManager()
 
     USERNAME_FIELD = 'email_address'

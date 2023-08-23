@@ -1,0 +1,293 @@
+<!--Main Navigation-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
+</head>
+<body>
+    <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<header>
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+  
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+    </style>
+  
+    <!-- Navbar -->
+    <div style="width:100%;">
+      {% include 'Navbar.html' with user="Adminsitrator" %}
+</div>
+{% if messages %}
+<div class="container fixed-top" style="margin-top: 5%;">
+   {% for message in messages %}
+   <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" id="message_box">
+       {{ message }}
+     
+   </div>
+   {% endfor %}
+</div>
+{% endif %}
+
+
+<script>
+  var message_tag = document.getElementById("message_box");
+  
+  setTimeout(function(){ 
+     message_tag.style.display = "none"; 
+  }, 3000);    
+  
+  </script>
+    <!-- Navbar -->
+  
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+      <h1 class="mb-3 h2">Welcome to ChronicleCraft</h1>
+      <p class="mb-3">Here You can Find Best Blogs </p>
+      <!-- <a class="btn btn-primary m-2" href="http://127.0.0.1:8000/blog/writeblog" role="button" rel="nofollow"
+         >Create a blog</a> -->
+ 
+    </div>
+    <!-- Jumbotron -->
+  </header>
+  <!--Main Navigation-->
+
+  <style>
+    /* Custom styles */
+    .border-black {
+      border: 3px solid black;
+    }
+  
+    .font-italic {
+      font-style: italic;
+    }
+  </style>
+  <style>
+    /* Style for the active tab link */
+    .nav-pills .nav-link.active {
+      border-bottom: 3px solid black;
+      background-color: lightgrey;
+      color: black; / /* You can change the color and thickness of the underline */
+    }
+  </style>
+ 
+  <script>
+          var myButton12 = null
+          var inputImage12 = null
+          var passwordInput12 = null
+          var repeatPasswordInput12 =null
+          var passwordMatchMessage12 = null
+          var submitButton12 = null
+          var termsCheckbox12 = null
+  </script>
+
+
+  <div class="container mt-5">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation" style="width: 200px; margin-left: 10%;">
+        <a class="nav-link border-black font-italic" href="{% url 'administrator:user' %}" style="width: 100%;" role="tab" aria-controls="pills-user" aria-selected="false">User</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link  border-black font-italic" href="{% url 'administrator:posts' %}" style="width: 100%;" role="tab" aria-controls="pills-post" aria-selected="true">Posts</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link active  border-black font-italic" href="{% url 'administrator:suggestions' %}" style="width: 100%;" role="tab" aria-controls="pills-suggestion" aria-selected="false">Suggestions</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link border-black font-italic" href="{% url 'administrator:comments' %}" role="tab" aria-controls="pills-comment" aria-selected="false" style="width: 100%;">Comments</a>
+      </li>
+    </ul>
+
+
+     
+  
+      <h1>Suggestions</h1>
+      <!-- Add your registration form content here -->
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#suggestModal" style="margin-bottom: 10px;">
+        <i class="fas fa-lightbulb"></i> Add Suggestion
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="suggestModal" tabindex="-1" aria-labelledby="suggestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="suggestModalLabel">Suggest Something</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Add your modal content here -->
+          
+              <p>Enter your suggestion here...</p>
+             {% include 'suggestion_form.html' with all_users=all_users all_posts=all_posts %}
+            
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary">Submit</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+
+      <div class="row" id="postCards">
+        {% if suggest_page %}
+        {% for suggest in suggest_page %}
+        <div class="col-md-3">
+            <div class="card" style="margin-top: 3%;">
+                <!-- <img src="{{ post.post.blog_title_image.url}}" class="card-img-top" alt="{{ post.post.name }}"  height="150"  style="border-radius: 50%; width: 80%; margin-left: 10%;"> -->
+    
+                <div class="card-body" >
+                    <b class="card-title">Post tile : </b>
+                    <h class="card-text">{{ suggest.post.title }}</h>
+                      <b>Suggestion by : </b>
+                    <h class="card-text">{{ suggest.user.name }}</h>
+                    </br>
+                    <b>text :  </b>
+                    <h class="card-text">{{ suggest.text }}</h>
+    
+                    <form method="post" action="{% url 'administrator:deletesuggestion' suggest.id %}" class="d-inline">
+                        {% csrf_token %}
+                    <div>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                      </div>
+                    </form>
+                    <!-- <button  class="btn btn-primary" data-toggle="modal" data-target="#updatesuggestion{{suggest.id}}">
+                      <i class="fas fa-trash"></i> Update
+                  </button> -->
+                  
+                    </br>
+    
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="updatesuggestion{{suggest.id}}" tabindex="-1" role="dialog" aria-labelledby="updatesuggestion{{suggest.id}}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="updatesuggestionModalLabel{{suggestionid}}">Update Suggestion</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <!-- Your form content goes here -->
+                      <form method="post" action="{% url 'administrator:createsuggestion' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                          <label for="commentText" class="form-label">Comment:</label>
+                          <input class="form-control" id="commentText" name="text" rows="4" value="{{suggest.text}}" required></input>
+                        </div>
+                        <div class="mb-3">
+                          <label for="userChoice" class="form-label">User:</label>
+                          <select class="form-select" id="userChoice" value="{{suggest.user}}" name="user_id">
+                            {% for user in all_users %}
+                              <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="postChoice" class="form-label">Post:</label>
+                          <select class="form-select" id="postChoice" name="blog_id" value="{{suggest.post}}">
+                            {% for post in all_posts %}
+                              <option value="{{ post.id }}">{{ post.title }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Comment</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+        {% endfor %}
+        
+    </div>
+    
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if suggest_page.has_previous %}
+            <li class="page-item">
+                <!-- <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">first</span>
+                </a> -->
+                <a class="page-link" href="{% url 'administrator:homepage' tab_name=tab_name %}?page=1" aria-label="First">
+                  <span aria-hidden="true">first</span>
+              </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{% url 'administrator:homepage' tab_name='suggestion' %}?page={{ suggest_page.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">previous</span>
+                </a>
+            </li>
+            {% endif %}
+    
+            {% for page_num in suggest_page.paginator.page_range %}
+            <li class="page-item {% if suggest_page.number == page_num %}active{% endif %}">
+                <a class="page-link" href="{% url 'administrator:homepage' tab_name='suggestion' %}?page={{page_num}}">{{ page_num }}</a>
+            </li>
+            {% endfor %}
+    
+            {% if suggest_page.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'administrator:homepage' tab_name='suggestion' %}?page={{ suggest_page.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">next</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{% url 'administrator:homepage' tab_name='suggestion' %}?page={{ suggest_page.paginator.num_pages }}" aria-label="Last">
+                    <span aria-hidden="true">last</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% else %}
+            <p>No Suggestions available.</p>
+      {% endif %}
+    </br>
+    
+    </div>
+
+

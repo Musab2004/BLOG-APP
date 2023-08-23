@@ -10,6 +10,7 @@ class BlogPost(models.Model):
     Category = models.CharField(max_length=200,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     isLiked = models.ManyToManyField(User, related_name='liked_posts')
+    is_apprroved = models.BooleanField(default=False) 
     class Meta:
         ordering = ['-created_at']
 
@@ -18,11 +19,12 @@ class BlogPost(models.Model):
 class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE,null=True)
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=500)
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
     is_reply = models.BooleanField(default=False) 
     created_at = models.DateTimeField(auto_now_add=True)
     isLiked = models.ManyToManyField(User, related_name='liked_comments')
+    attachment = models.FileField(upload_to='images/', null=True)
     class Meta:
         ordering = ['-created_at']
 class ReportedComments(models.Model):
@@ -34,7 +36,7 @@ class ReportedBlogPost(models.Model):
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE,null=True)
     message = models.CharField(max_length=200) 
 class Suggestion(models.Model):
-    user = models.ManyToManyField(User,null=True,related_name="suggestions")
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE,null=True)
     text = models.CharField(max_length=200)
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)

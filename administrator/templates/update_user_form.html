@@ -1,0 +1,144 @@
+<div class="modal fade"  id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Suggestion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+
+
+          <form method="post" action="{% url 'administrator:createuser' %}" enctype="multipart/form-data">
+
+            <p class="text-center">ADD User</p>
+          
+            <div class="image-container text-center">
+        
+              <label for="imageInput"></label>
+              <img src="{{user.profile_pic.url}}" id="previewImage" class="img-fluid" alt="Uploaded Image" style="border-radius: 50%; height: 100px; width: 200px;">
+              <input type="file" id="imageInput" name="profile_pic" class="d-none">
+            </div>
+          
+            <script>
+              const myButton = document.getElementById('previewImage');
+              const inputImage = document.getElementById('imageInput');
+              
+              myButton.addEventListener('click', function() {
+                inputImage.click();
+              });
+              
+              inputImage.addEventListener('change', function() {
+                const file = this.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                  const previewImage = document.getElementById('previewImage');
+                  previewImage.src = e.target.result;
+                  previewImage.style.display = 'block';
+                  previewImage.style.marginLeft = '30%';
+                };
+                
+                reader.readAsDataURL(file);
+              });
+            </script>
+          
+              <!-- Name input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="registerName" name="name" class="form-control" value={{user.name}} />
+              <label class="form-label" for="registerName"></label>
+            </div>
+        
+            <!-- Age input -->
+            <div class="form-outline mb-4">
+              <input type="number" id="registerAge" class="form-control" min="0" name="age" 
+                     pattern="[0-9]+" title="Please enter a valid numeric value" value={{user.age}} />
+              <label class="form-label" for="registerAge"></label>
+          </div>
+          
+         
+          
+          
+        
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="email" id="registerEmail" name="email_address" class="form-control" value={{user.email_address}} />
+                <label class="form-label" for="registerEmail"></label>
+            </div>
+            
+        
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="registerPassword" name="password" class="form-control" value={{user.password}} />
+              <label class="form-label" for="registerPassword"></label>
+            </div>
+        
+            <!-- Repeat Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="registerRepeatPassword"  class="form-control" value={{user.password}} />
+              <label class="form-label" for="registerRepeatPassword"></label>
+            </div>
+          
+            <!-- Checkbox -->
+            <div class="form-check d-flex justify-content-center mb-4">
+              <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required />
+              <label class="form-check-label" for="registerCheck">
+                I have read and agree to the terms
+              </label>
+            </div>
+            
+            <!-- Display password match message -->
+            <div id="passwordMatchMessage" style="color: red;"></div>
+            
+            <!-- Submit button -->
+            {% csrf_token %}
+            <button type="submit" id="submitButton" class="btn btn-primary btn-block mb-3">Sign in</button>
+          </form>
+          <script>
+            const passwordInput = document.getElementById('registerPassword');
+            const repeatPasswordInput = document.getElementById('registerRepeatPassword');
+            const passwordMatchMessage = document.getElementById('passwordMatchMessage');
+            const submitButton = document.getElementById('submitButton');
+            const termsCheckbox = document.getElementById('registerCheck');
+          
+            repeatPasswordInput.addEventListener('input', () => {
+              if (passwordInput.value === repeatPasswordInput.value) {
+                passwordMatchMessage.textContent = 'Passwords match';
+                passwordMatchMessage.style.color = 'green';
+              } else {
+                passwordMatchMessage.textContent = 'Passwords do not match';
+                passwordMatchMessage.style.color = 'red';
+              }
+              checkFormValidity();
+        });
+        
+        termsCheckbox.addEventListener('change', () => {
+        checkFormValidity();
+        });
+        function checkFormValidity() {
+        if (passwordInput.value === repeatPasswordInput.value && termsCheckbox.checked) {
+          submitButton.removeAttribute('disabled');
+        } else {
+          submitButton.setAttribute('disabled', 'true');
+        }
+        }
+          </script>
+
+
+
+
+
+
+
+        </div>
+        
+      </div>
+    </div>
+    </div>
+  
+  
+
+  

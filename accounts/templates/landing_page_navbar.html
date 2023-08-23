@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar with Dropdown</title>
+  <!-- Link to Bootstrap CSS -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color:  #000F1F;">
+  <b class="navbar-brand"  style="color: white;font-family: 'Courier New', Courier, monospace; " >ChronicleCraft</b>
+  <!-- <ul class="navbar-nav mr-auto flex-column flex-sm-row">
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'blog_home:homepage' %}">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'blog_home:writeblog' %}">Write Blog</a>
+    </li>
+  </ul> -->
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li> -->
+      
+     
+   
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li> -->
+    </ul>
+  </div>
+</nav>
+
+<!-- Link to Bootstrap JS (Optional if you want to use Bootstrap features that require JS) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

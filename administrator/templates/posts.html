@@ -1,0 +1,585 @@
+<!--Main Navigation-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
+</head>
+<body>
+    <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<header>
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+  
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+    </style>
+  
+    <!-- Navbar -->
+    <div style="width:100%;">
+      {% include 'Navbar.html' with user="Adminsitrator" %}
+</div>
+{% if messages %}
+<div class="container fixed-top" style="margin-top: 5%;">
+   {% for message in messages %}
+   <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" id="message_box">
+       {{ message }}
+     
+   </div>
+   {% endfor %}
+</div>
+{% endif %}
+
+
+<script>
+  var message_tag = document.getElementById("message_box");
+  
+  setTimeout(function(){ 
+     message_tag.style.display = "none"; 
+  }, 3000);    
+  
+  </script>
+    <!-- Navbar -->
+  
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+      <h1 class="mb-3 h2">Welcome to ChronicleCraft</h1>
+      <p class="mb-3">Here You can Find Best Blogs </p>
+      <!-- <a class="btn btn-primary m-2" href="http://127.0.0.1:8000/blog/writeblog" role="button" rel="nofollow"
+         >Create a blog</a> -->
+ 
+    </div>
+    <!-- Jumbotron -->
+  </header>
+  <!--Main Navigation-->
+
+  <style>
+    /* Custom styles */
+    .border-black {
+      border: 3px solid black;
+    }
+  
+    .font-italic {
+      font-style: italic;
+    }
+  </style>
+  <style>
+    /* Style for the active tab link */
+    .nav-pills .nav-link.active {
+      border-bottom: 3px solid black;
+      background-color: lightgrey;
+      color: black; / /* You can change the color and thickness of the underline */
+    }
+  </style>
+ 
+  <script>
+          var myButton12 = null
+          var inputImage12 = null
+          var passwordInput12 = null
+          var repeatPasswordInput12 =null
+          var passwordMatchMessage12 = null
+          var submitButton12 = null
+          var termsCheckbox12 = null
+  </script>
+
+
+  <div class="container mt-5">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation" style="width: 200px; margin-left: 10%;">
+        <a class="nav-link  border-black font-italic" href="{% url 'administrator:user' %}" style="width: 100%;" role="tab" aria-controls="pills-user" aria-selected="false">User</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link active border-black font-italic" href="{% url 'administrator:posts' %}" style="width: 100%;" role="tab" aria-controls="pills-post" aria-selected="true">Posts</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link border-black font-italic" href="{% url 'administrator:suggestions' %}" style="width: 100%;" role="tab" aria-controls="pills-suggestion" aria-selected="false">Suggestions</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link border-black font-italic" href="{% url 'administrator:comments' %}" role="tab" aria-controls="pills-comment" aria-selected="false" style="width: 100%;">Comments</a>
+      </li>
+    </ul>
+
+
+
+    <div class="tab-content">
+     
+
+
+      <div class="modal fade" id="exampleModalCenter_add_post" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add Suggestion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {% include 'post_form.html' with users=all_users %}
+            </div>
+            
+          </div>
+        </div>
+        </div>
+      
+        <!-- <div class="modal fade" id="exampleModalCenter_edit_post" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Suggestion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+             
+               
+             
+              </div>
+              
+            </div>
+          </div>
+          </div> -->
+      
+      
+      
+   
+              <h1>Posts</h1>
+              <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter_add_post" style="margin-bottom: 20px;">
+                <i class="fas fa-user-plus"></i> Add Post
+              </button>
+              <div class="container" style="margin-top: 1%; ">
+                <form action="" method="get" class="form-inline justify-content-center">
+                  <div class="form-group" >
+                      <input type="text" name="search" id="searchInputpost" class="form-control" placeholder="Search by name">
+                  </div>
+                  <button type="submit" class="btn btn-primary ml-2">Search</button>
+              </form>
+                <div class="row" id="postCards">
+                  {% if post_page %}
+                  {% for post in post_page %}
+      
+                  <div class="col-md-3">
+                    <div class="card"style=" margin-bottom: 4%;margin-top:15%">
+                      <img src="{{ post.blog_title_image.url}}" class="card-img-top" alt="{{ post.name }}"  height="150"  style=" width: 100%; ">
+              
+                      <div class="card-body"style="text-align: center;">
+                        <b class="card-title">{{ post.title }}</b>
+                        <p class="card-text">{{ post.user.name }}</p>
+                        <p class="card-text">{{ post.created_at.date }}</p>
+                        <form method="post" action="{% url 'administrator:deletepost' post.id %}" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">
+                              <i class="fas fa-trash"></i> Delete
+                          </button>
+                      </form>
+                        </br>
+      
+                        <button class="btn btn-primary" style="margin-top: 5px;" data data-toggle="modal" data-target="#postModal{{ post.id }}">
+                          <i class="fas fa-edit"></i> Update
+                        </button>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                        <div class="modal fade" id="postModal{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="personModalLabel{{ person.id }}" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="personModalLabel{{ person.id }}">{{ person.name }} Info</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+      
+      
+      
+      
+      
+                                    <div style="margin-top: 10%;">   
+         
+                                      <form method="post" id="blogForm" action="{% url 'administrator:updatepost' post.id %}" enctype="multipart/form-data">
+                              
+                                          <div class="form-group">
+                                            <!-- <div class="image-container text-center">
+                                          
+                                              <label for="imageInput"></label>
+                                              <img src="{{post.blog_title_image.url}}" id="previewImage23{{post.id}}" class="img-fluid" alt="Uploaded Image" style="border-radius: 2%; height: 200px; width: 40%;">
+                                            
+                                              <input type="file" id="imageInput23{{post.id}}" name="blog_title_image" class="d-none">
+                                            </div>
+      
+                                            <script>
+                                              myButton12 = document.getElementById('previewImage23{{post.id}}');
+                                              inputImage12 = document.getElementById('imageInput23{{post.id}}');
+                                              
+                                              myButton12.addEventListener('click', function() {
+                                                inputImage12.click();
+                                              });
+                                              
+                                              inputImage12.addEventListener('change', function() {
+                                                const file = this.files[0];
+                                                const reader = new FileReader();
+                                                
+                                                reader.onload = function(e) {
+                                                  const previewImage12 = document.getElementById('previewImage23{{post.id}}');
+                                                  previewImage12.src = e.target.result;
+                                                  
+                                                  previewImage12.style.display = 'block';
+                                                };
+                                                
+                                                reader.readAsDataURL(file);
+                                              });
+                                            </script> -->
+                                            <div class="image-container text-center">
+                                              <!-- Placeholder image -->
+                                              <label for="imageInput{{post.id}}"></label>
+                                              <img src="{{post.blog_title_image.url}}" id="previewImage{{post.id}}" class="img-fluid" alt="Uploaded Image" style="border-radius: 2%; height: 200px; width: 40%;">
+                                              <!-- File input -->
+                                              <input type="file" id="imageInput{{post.id}}" name="blog_title_image" class="d-none">
+                                            </div>
+                                            
+                                            <script>
+                                              function setupImageUpload(postId) {
+                                                const previewImage = document.getElementById(`previewImage${postId}`);
+                                                const inputImage = document.getElementById(`imageInput${postId}`);
+                                            
+                                                previewImage.addEventListener('click', function() {
+                                                  inputImage.click();
+                                                });
+                                            
+                                                inputImage.addEventListener('change', function() {
+                                                  const file = this.files[0];
+                                                  const reader = new FileReader();
+                                            
+                                                  reader.onload = function(e) {
+                                                    previewImage.src = e.target.result;
+                                                    previewImage.style.display = 'block';
+                                                    previewImage.style.marginLeft = '30%';
+                                                  };
+                                            
+                                                  reader.readAsDataURL(file);
+                                                });
+                                              }
+                                            
+                                              // Call the function for each post separately
+                                              setupImageUpload("{{post.id}}");
+                                            </script>
+      
+      
+                                            <input type="text" class="form-control" id="blogTitle" value="{{post.title}}" name="blogTitle" placeholder="Enter your blog title" required>
+                                            <input type="text" class="form-control" id="description" value="{{post.description}}"  name="description" placeholder="Enter description of your blog" required>
+                                            <input type="text" class="form-control" id="category" value="{{post.Category}}" name="Category" placeholder="Category" required>
+                                            
+                                            <!-- <select class="form-control" id="userChoice" name="user_choice">
+                                              <option value="{{post.user.id}}" disabled selected>Select a user</option>
+                                              {% for user in users %}
+                                                <option value="{{ user.id }}">{{ user.name}}</option>
+                                              {% endfor %}
+                              
+                                            </select> -->
+                                            <div id="editor1"></div>
+                                          </div>
+                                          
+                                          <input type="hidden" id="hiddenContent" name="hiddenContent">
+                                         {% csrf_token %}
+                                          <button type="submit" id="saveButton" class="btn btn-primary" style="margin-top: 5%;margin-left: 20%; width: 50%;">Save</button>
+                                        </form>
+                                    
+                              </div>
+                              <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>  
+                                     
+                   
+        
+      
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                      <!-- Add more person information fields as needed -->
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+      
+      
+      
+                
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <script>
+                  console.log("at least script is working")
+                  const editor1 = new Quill('#editor1', {
+                 
+                    theme: 'snow'
+                  });
+                  
+      
+      
+      
+                  const saveButton = document.getElementById('saveButton');
+                  const hiddenContentInput = document.getElementById('hiddenContent');
+              
+                  saveButton.addEventListener('click', () => {
+                    const content = editor.root.innerHTML; // Get the HTML content from the editor
+                    // You can now send the 'content' to your server for saving or further processing
+                    console.log(content);
+                    hiddenContentInput.value = content
+                  });
+                  
+              
+                      const myButton1 = document.getElementById('previewImage1');
+                      const Inputimage1 = document.getElementById('imageInput1');
+                  // Add a click event listener to the element
+                  myButton1.addEventListener('click', function() {
+                      const my= document.getElementById('imageInput1');
+                      console.log("it is clicked")
+                      my.click()
+                  
+                  });
+                  Inputimage1.addEventListener('change', function() {
+                    const file = this.files[0];
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                      const previewImage1 = document.getElementById('previewImage1');
+                      previewImage1.src = e.target.result;
+                      previewImage1.style.display = 'block';
+                      previewImage1.style.marginLeft = '30%';
+                      console.log("its running")
+                    };
+                  reader.readAsDataURL(file);
+                      // Function to read and display the selected image
+                  
+                    });
+                 
+                  </script>
+      
+      
+                <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center">
+                    {% if post_page.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">first</span>
+                      </a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ post_page.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">previous</span>
+                      </a>
+                    </li>
+                    {% endif %}
+              
+                    {% for page_num in post_page.paginator.page_range %}
+                    <li class="page-item {% if post_page.number == page_num %}active{% endif %}">
+                      <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                    {% endfor %}
+              
+                    {% if post_page.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ post_page.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">next</span>
+                      </a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="{% url 'administrator:homepage' tab_name='post' %}?page={{ post_page.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">last</span>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              
+                {% else %}
+                <p>No posts available.</p>
+                {% endif %}
+              </div>
+      
+      
+      
+      
+      
+              <h1>Reported Posts : </h1>
+      
+      
+      
+      
+      
+              <div class="container shadow-lg" style="margin-top: 3%;  margin-bottom: 2%;" >
+                <!-- <form action="" method="get" class="form-inline justify-content-center">
+                  <div class="form-group">
+                      <input type="text" name="search" id="searchInputpost" class="form-control" placeholder="Search by name">
+                  </div>
+                  <button type="submit" class="btn btn-primary ml-2">Search</button>
+              </form> -->
+            
+              <div class="row" id="postCards">
+                {% if report_post_page %}
+                    {% for post in report_post_page %}
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="{{ post.post.blog_title_image.url }}" class="card-img-top" alt="{{ post.post.name }}" height="150" style="width: 100%;">
+                                <div class="card-body" style="text-align: center;">
+                                    <b class="card-title">Post Reported: </b>
+                                    <h>{{ post.post.title }}</h>
+                                    <div>
+                                        <b class="card-text">Reported by:</b>
+                                    </div>
+                                    {% for user in post.user.all %}
+                                        <!-- <p class="card-text">{{ user.name }}</p> -->
+                                        <h class="card-text"> {{ user.name }}</h>
+                                       
+                                        {% if not forloop.last %}
+                                        <h>,</h>
+                                    {% endif %}
+                                    {% endfor %}
+                                    </br>
+                                    <b>Message:</b>
+                                    <p class="card-text"> {{ post.message }}</p>
+                                    <form method="post" action="{% url 'administrator:deletepost' post.post.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+      
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination justify-content-center">
+                        {% if repor_post_page.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?report_page=1" aria-label="First">
+                            <span aria-hidden="true">first</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?report_page={{ persons_page.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">previous</span>
+                          </a>
+                        </li>
+                        {% endif %}
+                  
+                        {% for page_num in report_post_page.paginator.page_range %}
+                        <li class="page-item {% if report_post_page.number == page_num %}active{% endif %}">
+                          <a class="page-link" href="?report_page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                        {% endfor %}
+                  
+                        {% if report_post_page.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?report_page={{ report_post_page.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">next</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?report_page={{ report_post_page.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">last</span>
+                          </a>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </nav>
+      
+      
+                {% else %}
+                    <p>No posts available.</p>
+                {% endif %}
+            </div>
+            
+           
+           
+              </br>
+              </div>
+      
+      
+            </div>
+      
+      
+      
+            <script>
+              const searchInputpost = document.getElementById('searchInputpost');
+              const postCards = document.getElementById('postCards').getElementsByClassName('col-md-3');
+            
+              searchInputpost.addEventListener('input', () => {
+                  const searchTerm = searchInputpost.value.trim().toLowerCase();
+                  console.log("i am here")
+                  for (const card of postCards) {
+                      const name = card.querySelector('.card-title').textContent.toLowerCase();
+                      
+                      if (name.includes(searchTerm)) {
+                          card.style.display = 'block';
+                      } else {
+                          card.style.display = 'none';
+                      }
+                  }
+              });
+            </script>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

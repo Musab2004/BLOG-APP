@@ -1,0 +1,505 @@
+<!--Main Navigation-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+
+<!-- MDB -->
+
+
+
+<!-- <script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+></script> -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+rel="stylesheet"
+/>
+
+</head>
+<body>
+   
+ 
+
+
+<header>
+    <!-- Intro settings -->
+    <style>
+      #intro {
+        /* Margin to fix overlapping fixed navbar */
+        margin-top: 58px;
+      }
+  
+      @media (max-width: 991px) {
+        #intro {
+          /* Margin to fix overlapping fixed navbar */
+          margin-top: 45px;
+        }
+      }
+    </style>
+  
+    <!-- Navbar -->
+    <div style="width:100%;">
+      {% include 'Navbar.html' with user="Adminsitrator" %}
+</div>
+{% if messages %}
+<div class="container fixed-top" style="margin-top: 5%;">
+   {% for message in messages %}
+   <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" id="message_box">
+       {{ message }}
+     
+   </div>
+   {% endfor %}
+</div>
+{% endif %}
+
+
+<script>
+  var message_tag = document.getElementById("message_box");
+  
+  setTimeout(function(){ 
+     message_tag.style.display = "none"; 
+  }, 3000);    
+  
+  </script>
+    <!-- Navbar -->
+
+    <!-- Jumbotron -->
+    <div id="intro" class="p-5 text-center bg-light">
+      <h1 class="mb-3 h2">Welcome to ChronicleCraft</h1>
+      <p class="mb-3">Here You can Find Best Blogs </p>
+      <!-- <a class="btn btn-primary m-2" href="http://127.0.0.1:8000/blog/writeblog" role="button" rel="nofollow"
+         >Create a blog</a> -->
+ 
+    </div>
+    <!-- Jumbotron -->
+  </header>
+  <!--Main Navigation-->
+
+  <style>
+    /* Custom styles */
+    .border-black {
+      border: 3px solid black;
+    }
+  
+    .font-italic {
+      font-style: italic;
+    }
+  </style>
+  <style>
+    /* Style for the active tab link */
+    .nav-pills .nav-link.active {
+      border-bottom: 3px solid black;
+      background-color: lightgrey;
+      color: black; / /* You can change the color and thickness of the underline */
+    }
+  </style>
+ 
+  <script>
+          var myButton12 = null
+          var inputImage12 = null
+          var passwordInput12 = null
+          var repeatPasswordInput12 =null
+          var passwordMatchMessage12 = null
+          var submitButton12 = null
+          var termsCheckbox12 = null
+  </script>
+
+
+
+
+  <div class="container mt-5">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation" style="width: 200px; margin-left: 10%;">
+        <a class="nav-link active border-black font-italic" href="{% url 'administrator:user' %}" style="width: 100%;" role="tab" aria-controls="pills-user" aria-selected="false">User</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link  border-black font-italic" href="{% url 'administrator:posts' %}" style="width: 100%;" role="tab" aria-controls="pills-post" aria-selected="true">Posts</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link border-black font-italic" href="{% url 'administrator:suggestions' %}" style="width: 100%;" role="tab" aria-controls="pills-suggestion" aria-selected="false">Suggestions</a>
+      </li>
+      <li class="nav-item" role="presentation" style="width: 200px;">
+        <a class="nav-link border-black font-italic" href="{% url 'administrator:comments' %}" role="tab" aria-controls="pills-comment" aria-selected="false" style="width: 100%;">Comments</a>
+      </li>
+    </ul>
+
+    <div class="modal fade" id="exampleModalCenter_add_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add Suggestion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            {% include 'signup_form.html' %}
+            </div>
+            
+          </div>
+        </div>
+        </div>
+
+
+    <div class="tab-pane fade show active" id="pills-user" role="tabpanel" aria-labelledby="tab-login">
+        <h1>Users</h1>
+        <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter_add_user" style="margin-bottom: 20px;">
+          <i class="fas fa-user-plus"></i> Add User
+        </button>
+      
+        <div class="col-md-12">
+          <form action="" method="get" class="form-inline justify-content-center">
+              <div class="form-group">
+                  <input type="text" name="search" id="searchInputuser" class="form-control" placeholder="Search by name">
+              </div>
+              <button type="submit" class="btn btn-primary ml-2">Search</button>
+          </form>
+      </div>
+
+        <div class="container" style="margin-top: 3%;">
+          <div class="row" id="personCards">
+            {% if persons_page %}
+            {% for person in persons_page %}
+            <div class="col-md-3">
+              <div class="card">
+                <img src="{{ person.profile_pic.url }}" class="card-img-top" alt="{{ person.name }}"  height="150"  style="border-radius: 50%; width: 80%; margin-left: 10%;">
+        
+                <div class="card-body"style="text-align: center;">
+                  <h5 class="card-title">{{ person.name }}</h5>
+                  <p class="card-text">{{ person.email_address }}</p>
+                  <form method="post" action="{% url 'administrator:deleteuser' person.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>
+                
+                 
+                  <!-- <form method="post" action="{% url 'administrator:updateuser' person.id %}" class="d-inline">
+                    {% csrf_token %} -->
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1;" data-person-id="{{ person.id }}" data-toggle="modal" data-target="#personModal{{ person.id }}">
+                        <i class="fas fa-edit"></i> Update
+                    </button>
+                   
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="personModal{{ person.id }}" tabindex="-1" role="dialog" aria-labelledby="personModalLabel{{ person.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="personModalLabel{{ person.id }}">{{ person.name }} Info</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+
+
+                                  <form method="post" action="{% url 'administrator:updateuser' person.id %}" enctype="multipart/form-data">
+
+            <p class="text-center">ADD User</p>
+          
+            <div class="image-container text-center">
+        
+              <label for="imageInput"></label>
+              <img src="{{person.profile_pic.url}}" id="previewImage12{{person.id}}" class="img-fluid" alt="Uploaded Image" style="border-radius: 50%; height: 100px; width: 200px;">
+              <input type="file"  value="{{person.profile_pic}}" id="imageInput12{{person.id}}" name="profile_pic" class="d-none">
+            </div>
+          
+            <script>
+              myButton12 = document.getElementById('previewImage12{{person.id}}');
+              inputImage12 = document.getElementById('imageInput12{{person.id}}');
+              
+              myButton12.addEventListener('click', function() {
+                inputImage12.click();
+              });
+              
+              inputImage12.addEventListener('change', function() {
+                const file = this.files[0];
+                const reader = new FileReader();
+                console.log("here are we")
+                reader.onload = function(e) {
+                  const previewImage129 = document.getElementById('previewImage12{{person.id}}');
+                  previewImage129.src = e.target.result;
+                  previewImage129.style.display = 'block';
+                  previewImage129.style.marginLeft = '30%';
+                };
+                
+                reader.readAsDataURL(file);
+              });
+            </script>
+          
+              <!-- Name input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="registerName" name="name" class="form-control" value="{{person.name}}" />
+              <label class="form-label" for="registerName"></label>
+            </div>
+        
+            <!-- Age input -->
+            <div class="form-outline mb-4">
+              <input type="number" id="registerAge" class="form-control" min="0" name="age" 
+                     pattern="[0-9]+" title="Please enter a valid numeric value" value={{person.age}} />
+              <label class="form-label" for="registerAge"></label>
+          </div>
+          
+         
+          
+          
+        
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="email" id="registerEmail" name="email_address" class="form-control" value="{{person.email_address}}" />
+                <label class="form-label" for="registerEmail"></label>
+            </div>
+            
+        
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="registerPassword12{{person.id}}" name="password" class="form-control" placeholder="New passwrod" required  />
+              <label class="form-label" for="registerPassword">New password</label>
+            </div>
+        
+            <!-- Repeat Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="registerRepeatPassword12{{person.id}}" name="repeatpassword" class="form-control"  placeholder="New Confirm passwrod" required />
+              <label class="form-label" for="registerRepeatPassword">New Confirm Password</label>
+            </div>
+          
+            <!-- Checkbox -->
+            <div class="form-check d-flex justify-content-center mb-4">
+              <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck12{{person.id}}" checked aria-describedby="registerCheckHelpText" required />
+              <label class="form-check-label" for="registerCheck">
+                I have read and agree to the terms
+              </label>
+            </div>
+            
+            <!-- Display password match message -->
+            <div id="passwordMatchMessage12{{person.id}}" style="color: red;"></div>
+            
+            <!-- Submit button -->
+            {% csrf_token %}
+            <button type="submit" id="submitButton12{{person.id}}" class="btn btn-primary btn-block mb-3">Sign in</button>
+
+            <script>
+            
+          //     passwordInput12 = document.getElementById('registerPassword12{{person.id}}');
+          //     repeatPasswordInput12 = document.getElementById('registerRepeatPassword12{{person.id}}');
+          //     passwordMatchMessage12 = document.getElementById('passwordMatchMessage12{{person.id}}');
+          //     submitButton12 = document.getElementById('submitButton12{{person.id}}');
+          //     termsCheckbox12 = document.getElementById('registerCheck12{{person.id}}');
+          //     console.log("we are here")
+          //     repeatPasswordInput12.addEventListener('input', () => {
+          //       console.log(repeatPasswordInput12)
+          //       console.log(passwordInput12)
+          //       if (passwordInput12.value === repeatPasswordInput12.value) {
+          //         passwordMatchMessage12.textContent = 'Passwords match';
+          //         passwordMatchMessage12.style.color = 'green';
+          //       } else {
+          //         passwordMatchMessage12.textContent = 'Passwords do not match';
+          //         passwordMatchMessage12.style.color = 'red';
+          //       }
+          //       checkFormValidity();
+          // });
+          
+          // termsCheckbox12.addEventListener('change', () => {
+          // checkFormValidity();
+          // });
+          // function checkFormValidity() {
+          // if (passwordInput12.value === repeatPasswordInput12.value && termsCheckbox12.checked) {
+          //   submitButton12.removeAttribute('disabled');
+          // } else {
+          //   submitButton12.setAttribute('disabled', 'true');
+          // }
+          // }
+  
+
+
+
+          function setupFormValidation(personId) {
+    const passwordInput = document.getElementById(`registerPassword12${personId}`);
+    const repeatPasswordInput = document.getElementById(`registerRepeatPassword12${personId}`);
+    const passwordMatchMessage = document.getElementById(`passwordMatchMessage12${personId}`);
+    const submitButton = document.getElementById(`submitButton12${personId}`);
+    const termsCheckbox = document.getElementById(`registerCheck12${personId}`);
+
+    repeatPasswordInput.addEventListener('input', () => {
+        if (passwordInput.value === repeatPasswordInput.value) {
+            passwordMatchMessage.textContent = 'Passwords match';
+            passwordMatchMessage.style.color = 'green';
+        } else {
+            passwordMatchMessage.textContent = 'Passwords do not match';
+            passwordMatchMessage.style.color = 'red';
+        }
+        checkFormValidity();
+    });
+    passwordInput.addEventListener('input', () => {
+        if (passwordInput.value === repeatPasswordInput.value) {
+            passwordMatchMessage.textContent = 'Passwords match';
+            passwordMatchMessage.style.color = 'green';
+        } else {
+            passwordMatchMessage.textContent = 'Passwords do not match';
+            passwordMatchMessage.style.color = 'red';
+        }
+        checkFormValidity();
+    });
+    termsCheckbox.addEventListener('change', () => {
+        checkFormValidity();
+    });
+
+    function checkFormValidity() {
+        if (passwordInput.value === repeatPasswordInput.value && termsCheckbox.checked) {
+            submitButton.removeAttribute('disabled');
+        } else {
+            submitButton.setAttribute('disabled', 'true');
+        }
+    }
+}
+
+// Call setupFormValidation for each form instance
+setupFormValidation('{{person.id}}');
+            </script>
+
+            
+          </form>
+      
+
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                    <!-- Add more person information fields as needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+            
+                  
+                   
+              
+                
+             
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+                
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+     
+          </div>
+        
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              {% if persons_page.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="First">
+                  <span aria-hidden="true">first</span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ persons_page.previous_page_number }}" aria-label="Previous">
+                  <span aria-hidden="true">previous</span>
+                </a>
+              </li>
+              {% endif %}
+        
+              {% for page_num in persons_page.paginator.page_range %}
+              <li class="page-item {% if persons_page.number == page_num %}active{% endif %}">
+                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+              </li>
+              {% endfor %}
+        
+              {% if persons_page.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ persons_page.next_page_number }}" aria-label="Next">
+                  <span aria-hidden="true">next</span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ persons_page.paginator.num_pages }}" aria-label="Last">
+                  <span aria-hidden="true">last</span>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+          {% else %}
+          <p>No Reported Comments available.</p>
+    {% endif %}
+        </div>
+      </div>
+      <script>
+        const searchInput = document.getElementById('searchInputuser');
+        const personCards = document.getElementById('personCards').getElementsByClassName('col-md-3');
+      
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            console.log("i am here")
+            for (const card of personCards) {
+                const name = card.querySelector('.card-title').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

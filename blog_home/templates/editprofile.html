@@ -1,7 +1,7 @@
 {% include 'md_bootstrap_scripts.html' %}
 
 
-
+{% include 'navbar.html' %}
 
 <div class="container" style="width: 80%;margin-left: 10%; margin-top: 10%;">
     <div class="text-center">
@@ -36,9 +36,13 @@
 
     <!-- Email input -->
     <div class="form-outline mb-4">
-        <input type="email" id="registerEmail" name="email_address" class="form-control" value={{user.email_address}} />
-        <label class="form-label" for="registerEmail"></label>
-    </div>
+      <input type="email" id="registerEmail" name="email_address" class="form-control" value="{{ user.email_address }}" />
+      <label class="form-label" for="registerEmail">Email Address</label>
+  </div>
+  <div class="form-outline mb-4">
+      <input type="email" id="confirmEmail" name="confirm_email" class="form-control" />
+      <label class="form-label" for="confirmEmail">Confirm Email</label>
+  </div>
     
 
     <!-- Password input -->

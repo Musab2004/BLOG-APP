@@ -19,16 +19,26 @@ rel="stylesheet"
 />
 </head>
 <body>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+
+
+
     <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
 ></script>
+
+{% include "landing_page_navbar.html"%}
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 {% if messages %}
-<div class="container">
+<div class="container fixed-top" style="margin-top: 5%;">
    {% for message in messages %}
    <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" id="message_box">
        {{ message }}
@@ -47,8 +57,8 @@ rel="stylesheet"
   }, 3000);    
   
   </script>
-      
-<div class="container" style="width: 50%; margin-top: 10%;">
+   
+<div class="container" style="width: 50%; margin-top: 14%;">
     <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
@@ -62,189 +72,142 @@ rel="stylesheet"
       <!-- Pills navs -->
       
       <!-- Pills content -->
+ 
       <div class="tab-content">
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-          <form method="post" action="{% url 'user_login' %}">
+          <form id="loginForm"method="post" action="{% url 'user_login' %}">
             <div class="text-center mb-3">
-              <p>Sign in with:</p>
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-              </button>
-      
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-google"></i>
-              </button>
-      
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-twitter"></i>
-              </button>
-      
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-github"></i>
-              </button>
+              
             </div>
+           
+          
       
-            <p class="text-center">or:</p>
-      
+            <div class="form-group" >
+              
+              <input type="email" class="form-control" name="email_address"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
             <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="loginName"  name="email_address" class="form-control" />
+            <!-- <div class="form-outline mb-4">
+              <input type="email" id="loginName"  name="email_address" class="form-control" required />
               <label class="form-label" for="loginName">Email or username</label>
+            </div> -->
+            <div class="form-group">
+             
+              <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password" required>
             </div>
-      
             <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="loginPassword"  name="password" class="form-control" />
+            <!-- <div class="form-outline mb-4">
+              <input type="password" id="loginPassword"  name="password" class="form-control" required />
               <label class="form-label" for="loginPassword">Password</label>
-            </div>
-      
+            </div> -->
+          
             <!-- 2 column grid layout -->
-            <div class="row mb-4">
-              <div class="col-md-6 d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check mb-3 mb-md-0">
-                  <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-                  <label class="form-check-label" for="loginCheck"> Remember me </label>
-                </div>
-              </div>
-      
-              <div class="col-md-6 d-flex justify-content-center">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-      
+     
             <!-- Submit button -->
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
       
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #001F3F; margin-top: 10px;" >Login</button>
+         
+         
+          
+        
             <!-- Register buttons -->
-            <div class="text-center">
+            <!-- <div class="text-center">
               <p>Not a member? <a href="#!">Register</a></p>
-            </div>
+            </div> -->
           </form>
+       
+        
+          
         </div>
         <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
           <form method="post" action="{% url 'user_signup' %}" enctype="multipart/form-data">
-            <div class="text-center mb-3">
-              <p>Sign up with:</p>
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-              </button>
-      
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-google"></i>
-              </button>
-      
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-twitter"></i>
-              </button>
-      
-              <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-github"></i>
-              </button>
-            </div>
-      
-            <p class="text-center">or:</p>
+     
 
          
      
   
- 
-
-<div class="image-container text-center">
-  <!-- Placeholder image -->
-  <label for="imageInput"></label>
-  <img src="https://mdbootstrap.com/img/new/slides/080.jpg" id="previewImage" class="img-fluid" alt="Uploaded Image" style="border-radius: 50%; height: 100px; width: 200px;">
-
-  <input type="file" id="imageInput" name="profile_pic" class="d-none">
-</div>
-<script>
-            
-  // Trigger file input click when the user clicks on the image
-  const myButton = document.getElementById('previewImage');
-  const Inputimage = document.getElementById('imageInput');
-// Add a click event listener to the element
-myButton.addEventListener('click', function() {
-  const my= document.getElementById('imageInput');
-  my.click()
-  console.log("I am here")
-
-});
-Inputimage.addEventListener('change', function() {
-const file = this.files[0];
-const reader = new FileReader();
-reader.onload = function(e) {
-  const previewImage = document.getElementById('previewImage');
-  previewImage.src = e.target.result;
-  previewImage.style.display = 'block';
-};
-reader.readAsDataURL(file);
-  // Function to read and display the selected image
-
-});
-
-</script>        
-
-<!-- Name input -->
-
-
-
-
-
-
-
-            <div class="form-outline mb-4">
-              <input type="text" id="registerName" name="name" class="form-control" />
-              <label class="form-label" for="registerName">Full Name</label>
-            </div>
-      
-            <!-- Age input -->
-            <div class="form-outline mb-4">
-              <input type="number" id="registerAge" class="form-control" min="0" name="age" 
-                     pattern="[0-9]+" title="Please enter a valid numeric value" />
-              <label class="form-label" for="registerAge">Age</label>
-          </div>
-          
          
+            
+              <div class="image-container text-center">
+                <!-- Placeholder image -->
+                <label for="imageInput"></label>
+                <img src="https://mdbootstrap.com/img/new/slides/080.jpg" id="previewImage" class="img-fluid" alt="Uploaded Image" style="border-radius: 50%;margin-bottom: 20px ; height: 100px; width: 200px;">
+                <input type="file" id="imageInput" name="profile_pic" class="d-none" >
+              </div>
+            
+              <script>
+                const myButton = document.getElementById('previewImage');
+                const inputImage = document.getElementById('imageInput');
+                
+                myButton.addEventListener('click', function() {
+                  inputImage.click();
+                });
+                
+                inputImage.addEventListener('change', function() {
+                  const file = this.files[0];
+                  const reader = new FileReader();
+                  
+                  reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    previewImage.style.marginLeft = '30%';
+                  };
+                  
+                  reader.readAsDataURL(file);
+                });
+              </script>
+            
           
-          
-      
-
-      
-
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="email" id="registerEmail" name="email_address"class="form-control" />
-              <label class="form-label" for="registerEmail">Email</label>
-            </div>
-       
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="registerPassword" name="password" class="form-control" />
-              <label class="form-label" for="registerPassword">Password</label>
-            </div>
-      
-            <!-- Repeat Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="registerRepeatPassword"  class="form-control" />
-              <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-            </div>
-      
-            <!-- Checkbox -->
-            <div class="form-check d-flex justify-content-center mb-4">
-              <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-                aria-describedby="registerCheckHelpText" />
-              <label class="form-check-label" for="registerCheck">
-                I have read and agree to the terms
-              </label>
+            
+         
+            
+            
+              <!-- Email input -->
+              <div class="form-group" >
               
-            </div>
-            <div id="passwordMatchMessage" style="color: red;"></div>
-            <!-- Submit button -->
-            {% csrf_token %}
-            <button type="submit" id="submitButton" class="btn btn-primary btn-block mb-3">Sign in</button>
-          </form>
+                <input type="name" class="form-control" name="name"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full Name" required>
+                
+              </div>
+              <div class="form-group"style="margin-top: 10px;">
+              
+                <input type="number" class="form-control" name="age" id="age" placeholder="Enter Age" required min="1" max="100">
+              </div>
+              
+              <div class="form-group" style="margin-top: 10px;" >
+              
+                <input type="email" class="form-control" name="email_address"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+        
+              <div class="form-group">
+               
+                <input type="password" class="form-control" name="password" id="registerPassword" placeholder="Password" required>
+              </div>
+              <div class="form-group" style="margin-top: 10px;">
+               
+                <input type="password" class="form-control" name="password" id="registerRepeatPassword" placeholder="Repeat Password" required>
+              </div>
+        
+              
+              <!-- Checkbox -->
+              <div class="form-check d-flex justify-content-center mb-4">
+                <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required />
+                <label class="form-check-label" for="registerCheck">
+                  I have read and agree to the terms
+                </label>
+              </div>
+              
+              <!-- Display password match message -->
+              <div id="passwordMatchMessage" style="color: red;"></div>
+              
+              <!-- Submit button -->
+              {% csrf_token %}
+              <button type="submit" id="submitButton" class="btn btn-primary btn-block mb-3" style="background-color: #001F3F">Sign in</button>
+
+            </form>
         </div>
       </div>
       </div>
@@ -265,7 +228,16 @@ reader.readAsDataURL(file);
           }
           checkFormValidity();
   });
-
+  passwordInput.addEventListener('input', () => {
+          if (passwordInput.value === repeatPasswordInput.value) {
+            passwordMatchMessage.textContent = 'Passwords match';
+            passwordMatchMessage.style.color = 'green';
+          } else {
+            passwordMatchMessage.textContent = 'Passwords do not match';
+            passwordMatchMessage.style.color = 'red';
+          }
+          checkFormValidity();
+  });
   termsCheckbox.addEventListener('change', () => {
     checkFormValidity();
   });
@@ -277,6 +249,25 @@ reader.readAsDataURL(file);
     }
   }
       </script>
+      {%if islogin == 0 %}
+           <script>
+            // JavaScript code to programmatically switch to the "Register" tab and activate its content
+            var registerTab = document.getElementById("tab-register");
+            var registerTabContent = document.getElementById("pills-register");
+        
+            registerTab.addEventListener("click", function(event) {
+                event.preventDefault();
+                var tab = new mdb.Tab(registerTab);
+                tab.show();
+        
+                var tabContent = new mdb.Tab(registerTabContent);
+                tabContent.show();
+            });
+        
+            // Trigger the click event programmatically to switch to the "Register" tab
+            registerTab.click();
+        </script>
+        {% endif %}
 </body>
 </html>
 

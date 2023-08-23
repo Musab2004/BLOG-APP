@@ -1,0 +1,58 @@
+
+
+{% for replysuggestion in all_suggestions %}
+
+    <div class="align-items-center" style="margin-left: 10%; margin-top: 5%;">
+        <!-- Left div with image -->
+        <div class="comment-container" style="display: flex; align-items: flex-start; margin-bottom: 2px;">
+            <!-- Left div with user avatar and name -->
+            <div>
+                <img src="{{replysuggestion.user.profile_pic.url}}" alt="User Avatar" class="rounded-circle" style="width: 60px; height: 30px;">
+                <h5 class="mb-1" style="font-size: 12px; width: 100%;">{{ replysuggestion.user.name }}</h5>
+            </div>
+            
+            <!-- Right div with comment content -->
+            <div class="card" style=" background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%; margin-left: 0%;height: 60px; border-radius: 35px; padding: 10px;">
+                <p style="margin-left: 5%; width: 100%;">{{ replysuggestion.text }}</p>
+
+            </div>
+        </div>
+        
+
+
+         <div class="btn-container" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); height: 40px; margin-left: 20%; width: 40%; border-radius: 35px;">
+            <div class="row" style="width: 100%; margin-left: 5%;">
+            
+           
+                <div class="col-md-4" style="margin-left: -8%;">
+               
+                    <form id="blogreport" class="like-reply-suggest-form" >
+                        <input type="hidden" id="hiddenContent2" name="blog_id" value="{{blog_post.id}}">
+                        <input type="hidden" id="hiddenContent2" name="suggestion_id" value="{{replysuggestion.id}}">
+                       
+                        {% csrf_token %}
+                        <button type="submit"  class="btn" style="background-color: white;"  id="likeButton" title="Like it">
+                            {% csrf_token %}
+                        
+                            <i class="fas fa-thumbs-up" id="btn_like_reply_suggest" style="color: {% if session_user in replysuggestion.isLiked.all %}blue{% else %}grey{% endif %}; font-size: 16px"></i>
+                            <p class="likes-count">{{replysuggestion.isLiked.all.count}}</p>                        
+                        </button>
+                     
+                    </form>
+                </div>
+            
+            </div>
+            </div> 
+
+
+
+
+
+
+
+
+        
+     
+    </div>
+  
+{% endfor %}

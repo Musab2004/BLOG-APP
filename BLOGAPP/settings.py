@@ -14,9 +14,17 @@ from pathlib import Path
 import os
 
 from django.contrib.messages import constants as message_constants
+import cloudinary
+from datetime import timedelta
+          
+cloudinary.config( 
+  cloud_name = "dhxwjjsjj", 
+  api_key = "412286443281952", 
+  api_secret = "***************************" 
+)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+LOGIN_URL = '/accounts/regist'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -49,6 +57,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts.apps.AccountsConfig",
     "blog_home.apps.BlogHomeConfig",
+    "administrator.apps.AdministratorConfig",
+    'cloudinary',
+    'axes',
+    
 
 ]
 AUTH_USER_MODEL = 'accounts.User'
@@ -60,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = "BLOGAPP.urls"
@@ -83,9 +96,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "BLOGAPP.wsgi.application"
 
-
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_USE_USER_AGENT = True
+AXES_COOLOFF_TIME = timedelta(minutes=5)  # How long to wait before resetting failed attempts
+AXES_FAILURE_LIMIT = 5  # Number of failed attempts before lockout
+AXES_LOCKOUT_TEMPLATE = '/home/musab/BLOGAPP/accounts/templates/custom_logout_template.html'  # Optional: Create a custom lockout template
+AXES_LOCKOUT_URL = 'custom-lockout-url'  
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# LOGGING = {
+#     'version': 1,
+#     'loggers': {
+        
+#         'axes.watch_login': {
+#             'handlers': ['console'],  # Use your desired logging handlers
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         # ...
+#     },
+# }
 
 DATABASES = {
      'default': {

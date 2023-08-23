@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Replies</title>
+    <!-- Add your CSS links here -->
+</head>
+
+<body>
+
+    {% for replycomment in all_comments %}
+
+    <div class="align-items-center" style="margin-left: 10%; margin-top: 3%;">
+
+        <div class="comment-container" style="display: flex; align-items: flex-start; margin-bottom: 5px;">
+            <!-- Left div with user avatar and name -->
+            <div>
+                <img src="{{replycomment.user.profile_pic.url}}" alt="User Avatar" class="rounded-circle"
+                    style="width: 60px;height: 40px;">
+                <h5 class="mb-1" style="font-size: 12px;">{{ replycomment.user.name }}</h5>
+            </div>
+
+            <!-- Right div with comment content -->
+            <div class="card"
+                style=" background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 200px; margin-left: 0%; border-radius: 35px; padding: 10px;">
+                <p style="margin-left: 5%; width: 100%;">{{ replycomment.text }}</p>
+            </div>
+        </div>
+
+        <div class="btn-container"
+            style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); height: 40px; margin-left: 6%; width: 7%; border-radius: 35px;">
+            <div class="row" style="width: 100%; margin-left: 5%;">
+                <div class="col-md-4">
+                    <button type="button" class="btn" data-toggle="modal"
+                        data-target="#exampleModalCenter-reply-comment{{ replycomment.id }}">
+                        <i class="fas fa-flag" style="color: red;font-size: 16px;"></i>
+                    </button>
+                </div>
+                <div class="col-md-4" style="margin-left: -8%;">
+                    <form class="like-reply-comment-form" >
+                        <input type="hidden" name="comment_id" value="{{ replycomment.id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" style="background-color: white;" title="Like it">
+                            <i class="fas fa-thumbs-up in"
+                                style="color: {% if session_user in replycomment.isLiked.all %}blue{% else %}grey{% endif %};font-size: 16px;"></i>
+                            <p class="likes-count">{{ replycomment.isLiked.all.count }}</p>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Comment Modal -->
+        <div class="modal fade" id="exampleModalCenter-reply-comment{{ replycomment.id }}" tabindex="-1"
+            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Report Comment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{% url 'blog_home:reportcomment' %}">
+                            <div class="form-group">
+                                <label for="messageInput">Message</label>
+                                <input type="text" class="form-control" id="messageInput" name="message"
+                                    placeholder="Enter your message" required>
+                                <input type="hidden" name="comment_id" value="{{ replycomment.id }}">
+                                <input type="hidden" name="blog_id" value="{{ blog_id }}">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Submit Report</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    <!-- Add your script tags here -->
+    
+
+  
+</body>
+
+</html>
+
+
