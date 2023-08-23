@@ -537,14 +537,22 @@ class ReplySuggestion(RegularUserLoginRequiredMixin,View):
         })
       
 
+
 import cloudinary
-          
-import cloudinary
-          
-cloudinary.config( 
-  cloud_name = "dhxwjjsjj", 
-  api_key = "412286443281952", 
-  api_secret = "wFL4hGHiEET8HbvrGenD_a0szUA" 
+import os
+from dotenv import load_dotenv          
+load_dotenv()
+
+# Access the variables using os.getenv()
+cloud_name = os.getenv("CLOUD_NAME")
+api_key = os.getenv("API_KEY")
+api_secret = os.getenv("API_SECRET")
+
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name=cloud_name,
+    api_key=api_key,
+    api_secret=api_secret
 )
 import cloudinary.uploader
 
